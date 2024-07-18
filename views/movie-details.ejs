@@ -1,0 +1,121 @@
+<!-- movie-details.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Details</title>
+    <style>
+        body{
+          background-color: #1a1a1a;
+            color: #f2f2f2;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            background-color: #333;
+            color: #f2f2f2;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar a {
+            color: #f2f2f2;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+        }
+
+        .search-bar input {
+            padding: 5px;
+            margin-right: 10px;
+        }
+
+        .search-bar button {
+            padding: 5px 10px;
+            background-color: #555;
+            color: #f2f2f2;
+            border: none;
+            cursor: pointer;
+        }
+
+        .movie-details {
+            text-align: center;
+            margin: 20px;
+            padding: 10px;
+            background-color: #333;
+            color: #f2f2f2;
+            border: 1px solid #555;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .movie-details h2 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .movie-details img {
+            width: 80%;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+
+        .movie-details p {
+            font-size: 1em;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <a href="/">Home</a>
+        <a href="/anime">Anime</a>
+        <a href="/bollywood">Bollywood</a>
+        <a href="/hollywood">Hollywood</a>
+        <a href="/southmovies">South Movies</a>
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search for movies...">
+            <button id="searchButton">Search</button>
+        </div>
+    </div>
+
+    <h1>Movie Details</h1>
+    <div class="movie-details">
+        <!-- Populate movie details dynamically here -->
+        <h2><%= selectedMovie.title %></h2>
+        <img src="<%= selectedMovie.img_link %>" alt="<%= selectedMovie.title %>">
+        <p>Release Date: <%= selectedMovie.release_date %></p>
+        <p>Genre: <%= selectedMovie.genre %></p>
+        <p>Director: <%= selectedMovie.director %></p>
+        <p>Starring: <%= selectedMovie.starring %></p>
+        <p>Download Link: <a href="<%= selectedMovie.download_link %>">Download</a></p>
+        <!-- Add more details as needed -->
+    </div>
+
+    <script>
+document.addEventListener('DOMContentLoaded', () => {
+    const movieCards = document.querySelectorAll('.movie-card');
+
+    movieCards.forEach(card => {
+        card.addEventListener('click', () => {
+            const movieId = card.getAttribute('data-id');
+            window.location.href = `/movie-details/${movieId}`;
+        });
+    });
+});
+    </script>
+</body>
+
+</html>

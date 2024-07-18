@@ -1,0 +1,140 @@
+<!-- anime.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime Movies</title>
+    <style>
+            body {
+            background-color: #1a1a1a;
+            color: #f2f2f2;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            background-color: #333;
+            color: #f2f2f2;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar a {
+            color: #f2f2f2;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+        }
+
+        .search-bar input {
+            padding: 5px;
+            margin-right: 10px;
+        }
+
+        .search-bar button {
+            padding: 5px 10px;
+            background-color: #555;
+            color: #f2f2f2;
+            border: none;
+            cursor: pointer;
+        }
+
+        .movie-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .movie-card {
+            background-color: #333;
+            color: #f2f2f2;
+            border: 1px solid #555;
+            border-radius: 5px;
+            padding: 10px;
+            width: 250px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .movie-card:hover {
+            transform: scale(1.05);
+        }
+
+        .movie-card h2 {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        .movie-card img {
+            width: 100%;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .movie-card p {
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+        </style>
+        
+</head>
+
+<body>
+    <div class="navbar">
+        <a href="/">Home</a>
+        <a href="/anime">Anime</a>
+        <a href="/bollywood">Bollywood</a>
+        <a href="/hollywood">Hollywood</a>
+        <a href="/southmovies">South Movies</a>
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search for movies...">
+            <button id="searchButton">Search</button>
+        </div>
+    </div>
+
+    <h1>Anime Movies</h1>
+    <div class="movie-container">
+        <% movies.forEach(movie => { %>
+            <div class="movie-card">
+                <h2><%= movie.title %></h2>
+                <img src="<%= movie.img_link %>" alt="<%= movie.title %>">
+                <p><%= movie.description %></p>
+                <p>Release Date: <%= movie.release_date %></p>
+            </div>
+        <% }); %>
+    </div>
+    <script>
+        const searchInput = document.getElementById('searchInput');
+        const searchButton = document.getElementById('searchButton');
+        const movieCards = document.querySelectorAll('.movie-card');
+      
+        searchButton.addEventListener('click', () => {
+          const searchTerm = searchInput.value.toLowerCase();
+      
+          movieCards.forEach(card => {
+            const title = card.querySelector('h2').innerText.toLowerCase();
+            if (title.includes(searchTerm)) {
+              card.style.display = 'block';
+              card.classList.add('show');
+            } else {
+              card.style.display = 'none';
+              card.classList.remove('show');
+            }
+          });
+        });
+      </script>
+</body>
+
+</html>
